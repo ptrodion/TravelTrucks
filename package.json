@@ -24,7 +24,8 @@
   "dependencies": {
     "lint-staged": "15.2.11",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "react-router-dom": "7.0.2"
   },
   "devDependencies": {
     "@eslint/js": "9.15.0",
