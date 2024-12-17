@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import LogoIcon from '../../assets/icons/LogoIcon/LogoIcon.jsx';
+import { LogoStyled } from './Logo.styled.jsx';
 
 const Logo = () => {
   return (
     <NavLink to="/">
-      <div>
+      <LogoStyled>
         <LogoIcon />
-      </div>
+      </LogoStyled>
     </NavLink>
   );
 };

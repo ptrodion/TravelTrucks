@@ -1,19 +1,19 @@
-import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo.jsx';
+import { HeaderNav, HeaderNavList, NavLinkElement } from './Header.styled.jsx';
 
 const Header = () => {
   return (
-    <nav>
+    <HeaderNav>
       <Logo />
-      <ul>
+      <HeaderNavList>
         <li>
-          <NavLink to="/">Home</NavLink>{' '}
+          <NavLinkElement to="/">Home</NavLinkElement>
         </li>
         <li>
-          <NavLink to="/campers">Catalog</NavLink>
+          <NavLinkElement to="/campers">Catalog</NavLinkElement>
         </li>
-      </ul>
-    </nav>
+      </HeaderNavList>
+    </HeaderNav>
   );
 };
 
