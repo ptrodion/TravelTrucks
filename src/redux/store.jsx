@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import vehiclesReducer from './vehiclesSlice.jsx';
-// import filtersReducer from './filtersSlice';
+import filterReducer from './filtersSlice.jsx';
 // import favoritesReducer from './favoritesSlice';
 
 const store = configureStore({
   reducer: {
     vehicles: vehiclesReducer,
-    // filters: filtersReducer,
+    filters: filterReducer,
     // favorites: favoritesReducer,
   },
 });

@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { filter } from '../../redux/filtersSlice.jsx';
+import Button from '../Button/Button.jsx';
+import AcIcon from '../../assets/icons/AC/Ac.jsx';
 
 const CatalogFilters = ({ onSubmit }) => {
+  const [location, setLocation] = useState('');
   const [filters, setFilters] = useState({
-    location: '',
     ac: false,
     automatic: false,
     kitchen: false,
@@ -13,21 +17,27 @@ const CatalogFilters = ({ onSubmit }) => {
     alcove: false,
   });
 
-  const handleFilterChange = (event) => {
-    if (event && event.target && event.target.tagName === 'BUTTON') {
-      const filter = event.target.name;
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        [filter]: !prevFilters[filter],
-      }));
-    }
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
   };
 
-  console.log(filters);
+  const handleFiltersChange = (name) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: !prevFilters[name],
+    }));
+  };
+
+  const dispatch = useDispatch();
+  // const handleFilterChange = evt => dispatch(filter(filtersData));
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(filters);
+    const filtersData = { location, ...filters };
+
+    console.log(filtersData);
+    onSubmit(filtersData);
+    dispatch(filter(filtersData));
   };
 
   return (
@@ -37,8 +47,8 @@ const CatalogFilters = ({ onSubmit }) => {
         <input
           type="text"
           name="location"
-          value={filters.location}
-          onChange={handleFilterChange}
+          value={location}
+          onChange={handleLocationChange}
           placeholder="City"
         />
       </div>
@@ -47,123 +57,60 @@ const CatalogFilters = ({ onSubmit }) => {
         <p>Filters</p>
         <p>Vehicle equipment</p>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <button
+          <Button
             type="button"
-            onClick={() => handleFilterChange('AC')}
-            style={{
-              padding: '0.5rem 1rem',
-              cursor: 'pointer',
-              backgroundColor: 'red',
-              color: 'white',
-              borderRadius: '5px',
-            }}
-          >
-            AC
-          </button>
-
-          <button
+            onClick={() => handleFiltersChange('ac')}
+            icon={<AcIcon />}
+            innerContent="AC"
+          />
+          <Button
             type="button"
-            onClick={() => handleFilterChange('kitchen')}
-            style={{
-              padding: '0.5rem 1rem',
-              cursor: 'pointer',
-              backgroundColor: 'red',
-              color: 'white',
-              borderRadius: '5px',
-            }}
-          >
-            Automatic
-          </button>
-
-          <button
+            onClick={() => handleFiltersChange('automatic')}
+            icon={<AcIcon />}
+            innerContent="Automatic"
+          />
+          <Button
             type="button"
-            onClick={() => handleFilterChange('kitchen')}
-            style={{
-              padding: '0.5rem 1rem',
-              cursor: 'pointer',
-              backgroundColor: 'red',
-              color: 'white',
-              borderRadius: '5px',
-            }}
-          >
-            Kitchen
-          </button>
-
-          <button
+            onClick={() => handleFiltersChange('kitchen')}
+            icon={<AcIcon />}
+            innerContent="Kitchen"
+          />
+          <Button
             type="button"
-            onClick={() => handleFilterChange('kitchen')}
-            style={{
-              padding: '0.5rem 1rem',
-              cursor: 'pointer',
-              backgroundColor: 'red',
-              color: 'white',
-              borderRadius: '5px',
-            }}
-          >
-            TV
-          </button>
-
-          <button
+            onClick={() => handleFiltersChange('tv')}
+            icon={<AcIcon />}
+            innerContent="TV"
+          />
+          <Button
             type="button"
-            onClick={() => handleFilterChange('kitchen')}
-            style={{
-              padding: '0.5rem 1rem',
-              cursor: 'pointer',
-              backgroundColor: 'red',
-              color: 'white',
-              borderRadius: '5px',
-            }}
-          >
-            Bathroom
-          </button>
+            onClick={() => handleFiltersChange('bathroom')}
+            icon={<AcIcon />}
+            innerContent="Bathroom"
+          />
         </div>
       </div>
 
       <div>
         <p>Vehicle type</p>
-        <button
+        <Button
           type="button"
-          onClick={() => handleFilterChange('kitchen')}
-          style={{
-            padding: '0.5rem 1rem',
-            cursor: 'pointer',
-            backgroundColor: 'red',
-            color: 'white',
-            borderRadius: '5px',
-          }}
-        >
-          Van
-        </button>
-
-        <button
+          onClick={() => handleFiltersChange('van')}
+          icon={<AcIcon />}
+          innerContent="Van"
+        />
+        <Button
           type="button"
-          onClick={() => handleFilterChange('kitchen')}
-          style={{
-            padding: '0.5rem 1rem',
-            cursor: 'pointer',
-            backgroundColor: 'red',
-            color: 'white',
-            borderRadius: '5px',
-          }}
-        >
-          Fully Integrated
-        </button>
-
-        <button
+          onClick={() => handleFiltersChange('fullyIntegrated')}
+          icon={<AcIcon />}
+          innerContent="Fully Integrated"
+        />
+        <Button
           type="button"
-          onClick={() => handleFilterChange('kitchen')}
-          style={{
-            padding: '0.5rem 1rem',
-            cursor: 'pointer',
-            backgroundColor: 'red',
-            color: 'white',
-            borderRadius: '5px',
-          }}
-        >
-          Alcove
-        </button>
+          onClick={() => handleFiltersChange('alcove')}
+          icon={<AcIcon />}
+          innerContent="Alcove"
+        />
       </div>
-
       <button type="submit">Search</button>
     </form>
   );
