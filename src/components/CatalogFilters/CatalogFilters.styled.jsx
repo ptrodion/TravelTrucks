@@ -28,6 +28,24 @@ export const WrapperLocationBlock = styled.div`
   transition: box-shadow 0.3s ease;
 `;
 
+export const InputLocation = styled.input`
+  border: none;
+  outline: none;
+  background-color: transparent;
+
+  &::placeholder {
+    color: ${(props) => props.theme.color.grayTextColor};
+  }
+
+  &:not(:focus):not(:placeholder-shown):valid {
+    background-color: transparent;
+  }
+
+  &:not(:focus):not(:placeholder-shown):invalid {
+    background-color: transparent;
+  }
+`;
+
 export const ParagraphFilter = styled.p`
   font-weight: ${(props) => props.theme.font.weights.medium};
   color: ${(props) => props.theme.color.secondTextColor};

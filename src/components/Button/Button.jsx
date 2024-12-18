@@ -5,13 +5,25 @@ import {
   WrapperButtonElements,
 } from './Button.styled.jsx';
 
-const Button = ({ innerContent, type, onClick, icon, toggleBorder }) => {
-  const [isRedBorder, setIsRedBorder] = useState(false);
+const Button = ({
+  innerContent,
+  type,
+  onClick,
+  icon,
+  toggleEquipment,
+  toggleType,
+}) => {
+  const [isToggleEquipment, setIsToggleEquipment] = useState(false);
+  const [isToggleType, setIsToggleType] = useState(false);
 
   const handleClick = (event) => {
-    if (toggleBorder) {
-      setIsRedBorder((prev) => !prev);
+    if (toggleEquipment) {
+      setIsToggleEquipment(!isToggleEquipment);
     }
+    if (toggleType) {
+      setIsToggleType(!isToggleType);
+    }
+
     if (onClick) {
       onClick(event);
     }
@@ -20,7 +32,7 @@ const Button = ({ innerContent, type, onClick, icon, toggleBorder }) => {
     <ButtonStyled
       type={type}
       onClick={handleClick}
-      className={isRedBorder ? 'selected-filter' : ''}
+      className={`${isToggleEquipment ? 'selected-filter' : ''} ${isToggleType ? 'selected-filter-type' : ''}`}
     >
       <WrapperButtonElements>
         {icon}

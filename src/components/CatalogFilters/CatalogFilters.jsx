@@ -6,6 +6,7 @@ import { fetchFilteredVehicles } from '../../redux/operations.jsx';
 import {
   ButtonSearch,
   Form,
+  InputLocation,
   ParagraphFilter,
   ParagraphFilterEquipment,
   ParagraphLocation,
@@ -62,7 +63,7 @@ const CatalogFilters = () => {
   };
 
   const handlevehicleTypeChange = (type) => {
-    setVehicleType(type);
+    setVehicleType((prevType) => (prevType === type ? null : type));
   };
 
   const handleSubmit = (event) => {
@@ -95,10 +96,9 @@ const CatalogFilters = () => {
         <ParagraphLocation>Location</ParagraphLocation>
         <WrapperLocationBlock>
           <LocationIcon />
-          <input
+          <InputLocation
             type="text"
             name="location"
-            value={location}
             onChange={handleLocationChange}
             placeholder="City"
           />
@@ -114,7 +114,7 @@ const CatalogFilters = () => {
             onClick={() => handleVehicleEquipmentChange('AC')}
             icon={<AcIcon />}
             innerContent="AC"
-            toggleBorder={true}
+            toggleEquipment={true}
           />
           <Button
             type="button"
@@ -123,28 +123,28 @@ const CatalogFilters = () => {
             }
             icon={<AutomaticIcon />}
             innerContent="Automatic"
-            toggleBorder={true}
+            toggleEquipment={true}
           />
           <Button
             type="button"
             onClick={() => handleVehicleEquipmentChange('kitchen')}
             icon={<KitchenIcon />}
             innerContent="Kitchen"
-            toggleBorder={true}
+            toggleEquipment={true}
           />
           <Button
             type="button"
             onClick={() => handleVehicleEquipmentChange('TV')}
             icon={<TVIcon />}
             innerContent="TV"
-            toggleBorder={true}
+            toggleEquipment={true}
           />
           <Button
             type="button"
             onClick={() => handleVehicleEquipmentChange('bathroom')}
             icon={<BathroomIcon />}
             innerContent="Bathroom"
-            toggleBorder={true}
+            toggleEquipment={true}
           />
         </WrapperFilters>
       </div>
@@ -157,18 +157,21 @@ const CatalogFilters = () => {
             onClick={() => handlevehicleTypeChange('van')}
             icon={<VanIcon />}
             innerContent="Van"
+            toggleType={true}
           />
           <Button
             type="button"
             onClick={() => handlevehicleTypeChange('fullyIntegrated')}
             icon={<FullyIntegratedIcon />}
             innerContent="Fully Integrated"
+            toggleType={true}
           />
           <Button
             type="button"
             onClick={() => handlevehicleTypeChange('alcove')}
             icon={<AlcoveIcon />}
             innerContent="Alcove"
+            toggleType={true}
           />
         </WrapperFilters>
       </div>

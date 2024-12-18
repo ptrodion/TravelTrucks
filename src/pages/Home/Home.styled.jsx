@@ -13,9 +13,8 @@ export const BackgroundImage = styled.div`
 `;
 
 export const TextWrapper = styled.div`
-  text-align: center;
+  padding: 260px 805px 260px 64px;
   color: ${(props) => props.theme.color.mainBkgColor};
-  font-size: 48px;
 `;
 
 export const StyledNavLink = styled(NavLink)`
@@ -36,4 +35,20 @@ export const StyledNavLink = styled(NavLink)`
   &.active {
     background-color: ${(props) => props.theme.color.buttonLinkColorHover};
   }
+`;
+
+export const MainHeader = styled.h1`
+  font-weight: ${(props) => props.theme.font.weights.semiBold};
+  font-size: ${(props) => props.theme.font.size.large};
+  line-height: ${(props) => props.theme.lineHeight.medium};
+  color: ${(props) => props.theme.color.mainBkgColor};
+  margin-bottom: 18px;
+`;
+
+export const SecondHeader = styled.h1`
+  font-weight: ${(props) => props.theme.font.weights.semiBold};
+  font-size: 24px;
+  line-height: ${(props) => props.theme.lineHeight.medium};
+  color: ${(props) => props.theme.color.mainBkgColor};
+  margin-bottom: 40px;
 `;

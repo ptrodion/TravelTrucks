@@ -5,12 +5,18 @@ export const ButtonStyled = styled.button`
   min-height: 96px;
   border-radius: 12px;
   border: 1px solid ${(props) => props.theme.color.borderColor};
+  background-color: ${(props) =>
+    props.isActive ? props.theme.color.mainTextColor : 'transparent'};
 
   &:hover {
     border-color: ${(props) => props.theme.color.buttonLinkColor};
   }
 
   &.selected-filter {
+    border-color: ${(props) => props.theme.color.buttonLinkColor};
+  }
+
+  &.selected-filter-type {
     border-color: ${(props) => props.theme.color.buttonLinkColor};
   }
 `;
