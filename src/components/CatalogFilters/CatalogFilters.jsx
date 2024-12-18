@@ -1,43 +1,80 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { filter } from '../../redux/filtersSlice.jsx';
 import Button from '../Button/Button.jsx';
 import AcIcon from '../../assets/icons/AC/Ac.jsx';
+import { fetchFilteredVehicles } from '../../redux/operations.jsx';
 
-const CatalogFilters = ({ onSubmit }) => {
+const CatalogFilters = () => {
+  const dispatch = useDispatch();
   const [location, setLocation] = useState('');
-  const [filters, setFilters] = useState({
-    ac: false,
-    automatic: false,
+  const [vehicleEquipment, setVehicleEquipment] = useState({
+    AC: false,
+    transmission: null,
     kitchen: false,
-    tv: false,
+    TV: false,
     bathroom: false,
-    van: false,
-    fullyIntegrated: false,
-    alcove: false,
+    // van: null,
+    // fullyIntegrated: null,
+    // alcove: null,
+  });
+
+  const [vehicleType, setVehicleType] = useState({
+    form: null,
   });
 
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
   };
 
-  const handleFiltersChange = (name) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: !prevFilters[name],
-    }));
+  const handleVehicleEquipmentChange = (name, value = null) => {
+    setVehicleEquipment((prevFilters) => {
+      if (value !== null) {
+        return {
+          ...prevFilters,
+          [name]: prevFilters[name] === value ? null : value, // Сбрасываем, если уже выбрано
+        };
+      }
+      return {
+        ...prevFilters,
+        [name]: !prevFilters[name],
+      };
+    });
   };
 
-  const dispatch = useDispatch();
-  // const handleFilterChange = evt => dispatch(filter(filtersData));
+  // const handlevehicleTypeChange = (type) => {
+  //   setVehicleType((prevType) => ({
+  //     ...prevType,
+  //     form: prevType.form === type ? null : type, // Сбрасываем значение, если оно уже выбрано
+  //   }));
+  // };
+
+  const handlevehicleTypeChange = (type) => {
+    setVehicleType(type);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const filtersData = { location, ...filters };
+
+    const activeFilters = Object.entries(vehicleEquipment)
+      .filter(([value]) => value)
+      .reduce((acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      }, {});
+
+    const filtersData = { ...activeFilters };
+
+    // Добавляем локацию, если она введена
+    if (location.trim()) {
+      filtersData.location = location;
+    }
+
+    if (vehicleType) {
+      filtersData.form = vehicleType;
+    }
 
     console.log(filtersData);
-    onSubmit(filtersData);
-    dispatch(filter(filtersData));
+    dispatch(fetchFilteredVehicles(filtersData));
   };
 
   return (
@@ -59,31 +96,31 @@ const CatalogFilters = ({ onSubmit }) => {
         <div style={{ display: 'flex', gap: '1rem' }}>
           <Button
             type="button"
-            onClick={() => handleFiltersChange('ac')}
+            onClick={() => handleVehicleEquipmentChange('AC')}
             icon={<AcIcon />}
             innerContent="AC"
           />
           <Button
             type="button"
-            onClick={() => handleFiltersChange('automatic')}
+            onClick={() => handleVehicleEquipmentChange('automatic')}
             icon={<AcIcon />}
             innerContent="Automatic"
           />
           <Button
             type="button"
-            onClick={() => handleFiltersChange('kitchen')}
+            onClick={() => handleVehicleEquipmentChange('kitchen')}
             icon={<AcIcon />}
             innerContent="Kitchen"
           />
           <Button
             type="button"
-            onClick={() => handleFiltersChange('tv')}
+            onClick={() => handleVehicleEquipmentChange('TV')}
             icon={<AcIcon />}
             innerContent="TV"
           />
           <Button
             type="button"
-            onClick={() => handleFiltersChange('bathroom')}
+            onClick={() => handleVehicleEquipmentChange('bathroom')}
             icon={<AcIcon />}
             innerContent="Bathroom"
           />
@@ -94,19 +131,19 @@ const CatalogFilters = ({ onSubmit }) => {
         <p>Vehicle type</p>
         <Button
           type="button"
-          onClick={() => handleFiltersChange('van')}
+          onClick={() => handlevehicleTypeChange('van')}
           icon={<AcIcon />}
           innerContent="Van"
         />
         <Button
           type="button"
-          onClick={() => handleFiltersChange('fullyIntegrated')}
+          onClick={() => handlevehicleTypeChange('fullyIntegrated')}
           icon={<AcIcon />}
           innerContent="Fully Integrated"
         />
         <Button
           type="button"
-          onClick={() => handleFiltersChange('alcove')}
+          onClick={() => handlevehicleTypeChange('alcove')}
           icon={<AcIcon />}
           innerContent="Alcove"
         />
