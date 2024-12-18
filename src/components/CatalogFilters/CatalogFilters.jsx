@@ -3,6 +3,24 @@ import { useDispatch } from 'react-redux';
 import Button from '../Button/Button.jsx';
 import AcIcon from '../../assets/icons/AC/Ac.jsx';
 import { fetchFilteredVehicles } from '../../redux/operations.jsx';
+import {
+  ButtonSearch,
+  Form,
+  ParagraphFilter,
+  ParagraphFilterEquipment,
+  ParagraphLocation,
+  WrapperFilters,
+  WrapperLocationBlock,
+  WrapperLocationGeneral,
+} from './CatalogFilters.styled.jsx';
+import LocationIcon from '../../assets/icons/Location/Location.jsx';
+import AutomaticIcon from '../../assets/icons/Automatic/Automatic.jsx';
+import KitchenIcon from '../../assets/icons/Kitchen/Kitchen.jsx';
+import TVIcon from '../../assets/icons/TV/TV.jsx';
+import BathroomIcon from '../../assets/icons/Bathroom/Bathroom.jsx';
+import VanIcon from '../../assets/icons/Van/Van.jsx';
+import FullyIntegratedIcon from '../../assets/icons/FullyIntegrated/FullyIntegrated.jsx';
+import AlcoveIcon from '../../assets/icons/Alcove/Alcove.jsx';
 
 const CatalogFilters = () => {
   const dispatch = useDispatch();
@@ -13,14 +31,9 @@ const CatalogFilters = () => {
     kitchen: false,
     TV: false,
     bathroom: false,
-    // van: null,
-    // fullyIntegrated: null,
-    // alcove: null,
   });
 
-  const [vehicleType, setVehicleType] = useState({
-    form: null,
-  });
+  const [vehicleType, setVehicleType] = useState('');
 
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
@@ -28,6 +41,13 @@ const CatalogFilters = () => {
 
   const handleVehicleEquipmentChange = (name, value = null) => {
     setVehicleEquipment((prevFilters) => {
+      if (name === 'transmission') {
+        return {
+          ...prevFilters,
+          transmission: prevFilters.transmission === value ? null : value,
+        };
+      }
+
       if (value !== null) {
         return {
           ...prevFilters,
@@ -41,13 +61,6 @@ const CatalogFilters = () => {
     });
   };
 
-  // const handlevehicleTypeChange = (type) => {
-  //   setVehicleType((prevType) => ({
-  //     ...prevType,
-  //     form: prevType.form === type ? null : type, // Сбрасываем значение, если оно уже выбрано
-  //   }));
-  // };
-
   const handlevehicleTypeChange = (type) => {
     setVehicleType(type);
   };
@@ -56,7 +69,7 @@ const CatalogFilters = () => {
     event.preventDefault();
 
     const activeFilters = Object.entries(vehicleEquipment)
-      .filter(([value]) => value)
+      .filter(([, value]) => value)
       .reduce((acc, [key, value]) => {
         acc[key] = value;
         return acc;
@@ -64,7 +77,6 @@ const CatalogFilters = () => {
 
     const filtersData = { ...activeFilters };
 
-    // Добавляем локацию, если она введена
     if (location.trim()) {
       filtersData.location = location;
     }
@@ -78,78 +90,90 @@ const CatalogFilters = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        Location
-        <input
-          type="text"
-          name="location"
-          value={location}
-          onChange={handleLocationChange}
-          placeholder="City"
-        />
-      </div>
+    <Form onSubmit={handleSubmit}>
+      <WrapperLocationGeneral>
+        <ParagraphLocation>Location</ParagraphLocation>
+        <WrapperLocationBlock>
+          <LocationIcon />
+          <input
+            type="text"
+            name="location"
+            value={location}
+            onChange={handleLocationChange}
+            placeholder="City"
+          />
+        </WrapperLocationBlock>
+      </WrapperLocationGeneral>
 
       <div>
-        <p>Filters</p>
-        <p>Vehicle equipment</p>
-        <div style={{ display: 'flex', gap: '1rem' }}>
+        <ParagraphFilter>Filters</ParagraphFilter>
+        <ParagraphFilterEquipment>Vehicle equipment</ParagraphFilterEquipment>
+        <WrapperFilters>
           <Button
             type="button"
             onClick={() => handleVehicleEquipmentChange('AC')}
             icon={<AcIcon />}
             innerContent="AC"
+            toggleBorder={true}
           />
           <Button
             type="button"
-            onClick={() => handleVehicleEquipmentChange('automatic')}
-            icon={<AcIcon />}
+            onClick={() =>
+              handleVehicleEquipmentChange('transmission', 'automatic')
+            }
+            icon={<AutomaticIcon />}
             innerContent="Automatic"
+            toggleBorder={true}
           />
           <Button
             type="button"
             onClick={() => handleVehicleEquipmentChange('kitchen')}
-            icon={<AcIcon />}
+            icon={<KitchenIcon />}
             innerContent="Kitchen"
+            toggleBorder={true}
           />
           <Button
             type="button"
             onClick={() => handleVehicleEquipmentChange('TV')}
-            icon={<AcIcon />}
+            icon={<TVIcon />}
             innerContent="TV"
+            toggleBorder={true}
           />
           <Button
             type="button"
             onClick={() => handleVehicleEquipmentChange('bathroom')}
-            icon={<AcIcon />}
+            icon={<BathroomIcon />}
             innerContent="Bathroom"
+            toggleBorder={true}
           />
-        </div>
+        </WrapperFilters>
       </div>
 
       <div>
-        <p>Vehicle type</p>
-        <Button
-          type="button"
-          onClick={() => handlevehicleTypeChange('van')}
-          icon={<AcIcon />}
-          innerContent="Van"
-        />
-        <Button
-          type="button"
-          onClick={() => handlevehicleTypeChange('fullyIntegrated')}
-          icon={<AcIcon />}
-          innerContent="Fully Integrated"
-        />
-        <Button
-          type="button"
-          onClick={() => handlevehicleTypeChange('alcove')}
-          icon={<AcIcon />}
-          innerContent="Alcove"
-        />
+        <ParagraphFilterEquipment>Vehicle type</ParagraphFilterEquipment>
+        <WrapperFilters>
+          <Button
+            type="button"
+            onClick={() => handlevehicleTypeChange('van')}
+            icon={<VanIcon />}
+            innerContent="Van"
+          />
+          <Button
+            type="button"
+            onClick={() => handlevehicleTypeChange('fullyIntegrated')}
+            icon={<FullyIntegratedIcon />}
+            innerContent="Fully Integrated"
+          />
+          <Button
+            type="button"
+            onClick={() => handlevehicleTypeChange('alcove')}
+            icon={<AlcoveIcon />}
+            innerContent="Alcove"
+          />
+        </WrapperFilters>
       </div>
-      <button type="submit">Search</button>
-    </form>
+      <ButtonSearch type="submit">Search</ButtonSearch>
+    </Form>
   );
 };
 

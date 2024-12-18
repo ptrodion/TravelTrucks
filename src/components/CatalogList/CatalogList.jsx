@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearVehicles } from '../../redux/vehiclesSlice.jsx';
 import { fetchVehicles } from '../../redux/operations.jsx';
-import { Wrapper } from './CatalogListStyled.jsx';
 import {
   selectError,
   selectIsLoading,
   selectListOfVehicles,
 } from '../../redux/selector.jsx';
+import { Wrapper } from './CatalogList.styled.jsx';
 
 const CatalogList = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const CatalogList = () => {
     };
   }, [dispatch]);
 
-  console.log(listOfVehicles);
+  // console.log(listOfVehicles);
 
   return (
     <div>

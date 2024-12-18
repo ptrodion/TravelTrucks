@@ -7,6 +7,7 @@ body {
   /* margin: 0; */
   font-family: 'Inter', sans-serif;
   font-size: 16px;
+  color: ${(props) => props.theme.color.mainTextColor};
   /* letter-spacing: 0.04em;
   color: ${(props) => props.theme.color.color};
   background-color: ${(props) => props.theme.color.bkgColor};

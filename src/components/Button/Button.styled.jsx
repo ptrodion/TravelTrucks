@@ -4,6 +4,25 @@ export const ButtonStyled = styled.button`
   width: 112px;
   min-height: 96px;
   border-radius: 12px;
-  padding: 16px 40px;
-  border: 1px solid;
+  border: 1px solid ${(props) => props.theme.color.borderColor};
+
+  &:hover {
+    border-color: ${(props) => props.theme.color.buttonLinkColor};
+  }
+
+  &.selected-filter {
+    border-color: ${(props) => props.theme.color.buttonLinkColor};
+  }
+`;
+
+export const WrapperButtonElements = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${(props) => props.theme.gaps.s};
+`;
+
+export const ButtonElementContent = styled.p`
+  font-weight: ${(props) => props.theme.font.weights.medium};
+  display: flex;
 `;
