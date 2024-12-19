@@ -4,21 +4,11 @@ import 'modern-normalize';
 const ResetStyles = createGlobalStyle`
   
 body {
-  /* margin: 0; */
+  margin: 0;
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   color: ${(props) => props.theme.color.mainTextColor};
-  /* letter-spacing: 0.04em;
-  color: ${(props) => props.theme.color.color};
-  background-color: ${(props) => props.theme.color.bkgColor};
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
 }
-
-/* code {
-  font-family: source-code-pro, Menlo, Moanco, Consolas, 'Courier New',
-    monospace;
-} */
 
 h1,
 h2,

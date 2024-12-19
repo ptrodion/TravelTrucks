@@ -74,22 +74,3 @@ export const WrapperFilters = styled.div`
   gap: ${(props) => props.theme.gaps.x};
   margin-bottom: 32px;
 `;
-
-export const ButtonSearch = styled.button`
-  display: inline-block;
-  min-width: 166px;
-  height: 56px;
-  border-radius: 200px;
-  padding: 16px 56.5px;
-  line-height: ${(props) => props.theme.lineHeight.medium};
-  color: ${(props) => props.theme.color.whiteColor};
-  background-color: ${(props) => props.theme.color.buttonLinkColor};
-
-  &:hover {
-    background-color: ${(props) => props.theme.color.buttonLinkColorHover};
-  }
-
-  &.active {
-    background-color: ${(props) => props.theme.color.buttonLinkColorHover};
-  }
-`;

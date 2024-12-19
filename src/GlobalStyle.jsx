@@ -1,3 +1,27 @@
+import styled from 'styled-components';
+
+export const StylesMainButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 166px;
+  height: 56px;
+  border-radius: 200px;
+  padding: 16px 56.5px;
+  font-size: 16px;
+  line-height: 1.33;
+  color: ${(props) => props.theme.color.whiteColor};
+  background-color: ${(props) => props.theme.color.buttonLinkColor};
+
+  &:hover {
+    background-color: ${(props) => props.theme.color.buttonLinkColorHover};
+  }
+
+  &.active {
+    background-color: ${(props) => props.theme.color.buttonLinkColorHover};
+  }
+`;
+
 const globalStyle = {
   color: {
     whiteColor: '#FFFFFF',
@@ -30,6 +54,7 @@ const globalStyle = {
     m: '10px',
     x: '12px',
     xl: '32px',
+    xxl: '64px',
   },
 };
 

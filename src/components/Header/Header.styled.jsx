@@ -18,8 +18,8 @@ export const HeaderNavList = styled.ul`
 `;
 
 export const NavLinkElement = styled(NavLink)`
-  font-weight: 500;
-  line-height: 1.5;
+  font-weight: ${(props) => props.theme.font.weights.medium};
+  line-height: ${(props) => props.theme.lineHeight.medium};
 
   &.active {
     color: ${(props) => props.theme.color.buttonLinkColorHover};

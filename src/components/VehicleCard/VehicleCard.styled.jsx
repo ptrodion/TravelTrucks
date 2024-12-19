@@ -1,12 +1,5 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-  min-width: 888px;
-  display: flex;
-  flex-direction: column;
-  gap: ${(props) => props.theme.gaps.xl};
-`;
-
 export const WrapperList = styled.div`
   display: flex;
   flex-direction: row;

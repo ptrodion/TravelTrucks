@@ -4,7 +4,6 @@ import Button from '../Button/Button.jsx';
 import AcIcon from '../../assets/icons/AC/Ac.jsx';
 import { fetchFilteredVehicles } from '../../redux/operations.jsx';
 import {
-  ButtonSearch,
   Form,
   InputLocation,
   ParagraphFilter,
@@ -24,6 +23,7 @@ import FullyIntegratedIcon from '../../assets/icons/FullyIntegrated/FullyIntegra
 import AlcoveIcon from '../../assets/icons/Alcove/Alcove.jsx';
 import { selectLimit } from '../../redux/selector.jsx';
 import { setFilters, setPage } from '../../redux/vehiclesSlice.jsx';
+import { StylesMainButton } from '../../GlobalStyle.jsx';
 
 const CatalogFilters = () => {
   const dispatch = useDispatch();
@@ -181,7 +181,7 @@ const CatalogFilters = () => {
           />
         </WrapperFilters>
       </div>
-      <ButtonSearch type="submit">Search</ButtonSearch>
+      <StylesMainButton type="submit">Search</StylesMainButton>
     </Form>
   );
 };

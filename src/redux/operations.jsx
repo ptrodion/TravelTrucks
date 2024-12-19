@@ -36,8 +36,6 @@ export const fetchFilteredVehicles = createAsyncThunk(
       const response = await instance.get('campers', {
         params: { ...filters, page, limit },
       });
-      // const response = await instance.get('campers?AC=true&bathroom=false&engine=petrol');
-
       return response.data;
     } catch (error) {
       if (error.response) {
