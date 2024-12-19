@@ -1,4 +1,12 @@
-import { ListImg, WrapperList } from './VehicleCard.styled.jsx';
+import {
+  CardHeader,
+  CardHeaderItem,
+  CardHeaderParagraph,
+  ListImg,
+  WrapperBlock,
+  WrapperList,
+} from './VehicleCard.styled.jsx';
+import FavoriteIcon from '../../assets/icons/Favorite/Favorite.jsx';
 
 const VehicleCard = ({ vehicle }) => {
   const {
@@ -24,15 +32,16 @@ const VehicleCard = ({ vehicle }) => {
           style={{ width: '292px', height: '320px' }}
         />
       )}
-      <div>
-        <ul>
+      <WrapperBlock>
+        <CardHeader>
           <li>
-            <p>{name}</p>
+            <CardHeaderParagraph>{name}</CardHeaderParagraph>
           </li>
-          <li>
-            <p>{price}</p>
-          </li>
-        </ul>
+          <CardHeaderItem>
+            <CardHeaderParagraph>${price} </CardHeaderParagraph>
+            <FavoriteIcon />
+          </CardHeaderItem>
+        </CardHeader>
         <ul>
           <li>
             <p>{rating}</p>
@@ -58,7 +67,7 @@ const VehicleCard = ({ vehicle }) => {
             <p>{AC}</p>
           </li>
         </ul>
-      </div>
+      </WrapperBlock>
     </WrapperList>
   );
 };
