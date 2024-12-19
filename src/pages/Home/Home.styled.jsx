@@ -25,7 +25,7 @@ export const StyledNavLink = styled(NavLink)`
   padding: 16px 56.5px;
   font-size: 16px;
   line-height: 1.33;
-  color: ${(props) => props.theme.color.mainTextColor};
+  color: ${(props) => props.theme.color.whiteColor};
   background-color: ${(props) => props.theme.color.buttonLinkColor};
 
   &:hover {

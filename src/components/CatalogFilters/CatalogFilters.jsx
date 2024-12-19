@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button/Button.jsx';
 import AcIcon from '../../assets/icons/AC/Ac.jsx';
 import { fetchFilteredVehicles } from '../../redux/operations.jsx';
@@ -22,9 +22,13 @@ import BathroomIcon from '../../assets/icons/Bathroom/Bathroom.jsx';
 import VanIcon from '../../assets/icons/Van/Van.jsx';
 import FullyIntegratedIcon from '../../assets/icons/FullyIntegrated/FullyIntegrated.jsx';
 import AlcoveIcon from '../../assets/icons/Alcove/Alcove.jsx';
+import { selectLimit } from '../../redux/selector.jsx';
+import { setFilters, setPage } from '../../redux/vehiclesSlice.jsx';
 
 const CatalogFilters = () => {
   const dispatch = useDispatch();
+  const limit = useSelector(selectLimit);
+
   const [location, setLocation] = useState('');
   const [vehicleEquipment, setVehicleEquipment] = useState({
     AC: false,
@@ -52,7 +56,7 @@ const CatalogFilters = () => {
       if (value !== null) {
         return {
           ...prevFilters,
-          [name]: prevFilters[name] === value ? null : value, // Сбрасываем, если уже выбрано
+          [name]: prevFilters[name] === value ? null : value,
         };
       }
       return {
@@ -76,18 +80,20 @@ const CatalogFilters = () => {
         return acc;
       }, {});
 
-    const filtersData = { ...activeFilters };
+    const newFiltersData = { ...activeFilters };
 
     if (location.trim()) {
-      filtersData.location = location;
+      newFiltersData.location = location;
     }
 
     if (vehicleType) {
-      filtersData.form = vehicleType;
+      newFiltersData.form = vehicleType;
     }
 
-    console.log(filtersData);
-    dispatch(fetchFilteredVehicles(filtersData));
+    dispatch(setFilters(newFiltersData));
+    dispatch(setPage(1));
+
+    dispatch(fetchFilteredVehicles({ newFiltersData, page: 1, limit }));
   };
 
   return (

@@ -7,10 +7,12 @@ export const instance = axios.create({
 
 export const fetchVehicles = createAsyncThunk(
   'vehicles',
-  async (_, thunkAPI) => {
+  async ({ page, limit }, thunkAPI) => {
     try {
-      const response = await instance.get('campers');
-      return response.data.items;
+      const response = await instance.get('campers', {
+        params: { page, limit },
+      });
+      return response.data;
     } catch (error) {
       if (error.response) {
         return thunkAPI.rejectWithValue({
@@ -29,18 +31,14 @@ export const fetchVehicles = createAsyncThunk(
 
 export const fetchFilteredVehicles = createAsyncThunk(
   'vehicles/filter',
-  async (filters, thunkAPI) => {
+  async ({ filters, page, limit }, thunkAPI) => {
     try {
-      console.log('FILTERS', filters);
-      console.log(
-        'Request',
-        await instance.get('campers', { params: filters })
-      );
-      const response = await instance.get('campers', { params: filters });
+      const response = await instance.get('campers', {
+        params: { ...filters, page, limit },
+      });
       // const response = await instance.get('campers?AC=true&bathroom=false&engine=petrol');
-      console.log('DATA', response.data.items);
 
-      return response.data.items;
+      return response.data;
     } catch (error) {
       if (error.response) {
         return thunkAPI.rejectWithValue({
