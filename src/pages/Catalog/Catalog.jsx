@@ -51,8 +51,15 @@ const CatalogList = () => {
   }, [page, filters, dispatch]);
 
   const handleLoadMore = () => {
+    // window.scrollTo({
+    //   top: 0,
+    //   behavior: 'smooth',
+    // });
+
     dispatch(setPage(page + 1));
   };
+
+  console.log(listOfVehicles);
 
   return (
     <Wrapper>

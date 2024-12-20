@@ -6,8 +6,10 @@ const ResetStyles = createGlobalStyle`
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
+  font-weight:  ${(props) => props.theme.font.weights.regular};;
   font-size: 16px;
   color: ${(props) => props.theme.color.mainTextColor};
+  line-height: ${(props) => props.theme.lineHeight.medium};;
 }
 
 h1,

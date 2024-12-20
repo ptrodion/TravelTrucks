@@ -1,8 +1,8 @@
-const BathroomIcon = () => {
+const BathroomIcon = ({ width = '32px', height = '32px' }) => {
   return (
     <svg
-      width="31"
-      height="27"
+      width={width}
+      height={height}
       viewBox="0 0 31 27"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

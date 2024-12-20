@@ -7,7 +7,6 @@ export const StylesMainButton = styled.button`
   width: 166px;
   height: 56px;
   border-radius: 200px;
-  padding: 16px 56.5px;
   font-size: 16px;
   line-height: 1.33;
   color: ${(props) => props.theme.color.whiteColor};
@@ -32,6 +31,7 @@ const globalStyle = {
     buttonLinkColor: '#E44848',
     buttonLinkColorHover: '#D84343',
     borderColor: '#DADDE1',
+    itemsBkgColor: '#F2F4F7',
   },
   font: {
     weights: {
